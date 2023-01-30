@@ -9,12 +9,17 @@ import numpy
 import random
 
 class SIMULATION:
-    def __init__(self):
+    def __init__(self,directOrGUI):
        
-        self.physicsClient = p.connect(p.GUI)
+        self.runType = directOrGUI
+        if self.runType == "DIRECT":
+            self.physicsClient = p.connect(p.DIRECT)
+        else:
+            self.physicsClient = p.connect(p.GUI)
+
         
         p.setAdditionalSearchPath(pybullet_data.getDataPath())
-        p.setGravity(0,0,-20.8)
+        p.setGravity(0,0,-9.8)
     
 
         self.world = WORLD()
@@ -23,12 +28,12 @@ class SIMULATION:
 
     def Run(self):
         for i in range(c.steps):
-            
             p.stepSimulation()
             self.robot.Sense(i)
             self.robot.Think()
             self.robot.ACT(i)
-
+            if self.runType == "GUI":
+                time.sleep(1/1000)
             '''
          
             pyrosim.Set_Motor_For_Joint(
@@ -45,10 +50,12 @@ class SIMULATION:
                 maxForce = 100)
 
 '''
-            time.sleep(1/60)
-          
+            time.sleep(1/1000)
+    def Get_Fitness(self):
+        self.robot.Get_Fitness()
     def __del__(self):
         p.disconnect()
+   
 
 
 

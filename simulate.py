@@ -6,11 +6,13 @@ import pyrosim.pyrosim as pyrosim
 import numpy
 import random
 from simulation import SIMULATION
+import sys
 #Lets Start
-simulation = SIMULATION()
+
+directOrGUI = sys.argv[1]
+simulation = SIMULATION(directOrGUI)
 simulation.Run()
-time.sleep(1000)
-exit()
+simulation.Get_Fitness()
 
 
 '''

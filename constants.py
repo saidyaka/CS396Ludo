@@ -8,7 +8,7 @@ import random
 
 
 
-
+numberOfGenerations = 20
 back_amplitude = numpy.pi/2
 back_frequency = 5
 back_phaseOffset = -numpy.pi/2

@@ -26,8 +26,14 @@ class ROBOT:
             self.sensors[name].Get_Value(t)
     def Think(self):
         self.nn.Update()
-        self.nn.Print()
-        
+       #self.nn.Print()
+    def Get_Fitness(self):
+        stateOfLinkZero = p.getLinkState(self.robotId,0)
+        positionOfLinkZero = stateOfLinkZero[0]
+        xCoordinateOfLinkZero = positionOfLinkZero[0]
+        file = open("fitness.txt", "w")
+        file.write(str(xCoordinateOfLinkZero))
+        file.close()  
     def Prepare_To_Act(self):
         self.joints ={}
         for jointName in pyrosim.jointNamesToIndices:
@@ -46,5 +52,7 @@ class ROBOT:
             if self.nn.Is_Motor_Neuron(neuronName):
                 jointName = self.nn.Get_Motor_Neurons_Joint(neuronName)
                 desiredAngle = self.nn.Get_Value_Of(neuronName)
-                print(jointName.encode("utf-8"))
+                #print(jointName.encode("utf-8"))
                 self.joints[jointName.encode("utf-8")].Set_Value(desiredAngle, self.robotId)
+
+
