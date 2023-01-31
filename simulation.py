@@ -9,8 +9,9 @@ import numpy
 import random
 
 class SIMULATION:
-    def __init__(self,directOrGUI):
-       
+    def __init__(self,directOrGUI, solutionID):
+        self.directOrGUI = directOrGUI
+
         self.runType = directOrGUI
         if self.runType == "DIRECT":
             self.physicsClient = p.connect(p.DIRECT)
@@ -23,7 +24,7 @@ class SIMULATION:
     
 
         self.world = WORLD()
-        self.robot = ROBOT()
+        self.robot = ROBOT(solutionID)
 
 
     def Run(self):
@@ -33,7 +34,7 @@ class SIMULATION:
             self.robot.Think()
             self.robot.ACT(i)
             if self.runType == "GUI":
-                time.sleep(1/1000)
+                time.sleep(1/10000)
             '''
          
             pyrosim.Set_Motor_For_Joint(

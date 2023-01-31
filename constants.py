@@ -8,12 +8,12 @@ import random
 
 
 
-numberOfGenerations = 20
+numberOfGenerations = 10
 back_amplitude = numpy.pi/2
 back_frequency = 5
 back_phaseOffset = -numpy.pi/2
 
-
+populationSize = 10
 steps = 1000
 front_amplitude = numpy.pi/2
 front_frequency = 10
