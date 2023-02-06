@@ -33,9 +33,9 @@ class ROBOT:
         self.nn.Update()
        #self.nn.Print()
     def Get_Fitness(self):
-        stateOfLinkZero = p.getLinkState(self.robotId,0)
-        positionOfLinkZero = stateOfLinkZero[0]
-        xCoordinateOfLinkZero = positionOfLinkZero[0]
+        basePositionAndOrientation = p.getBasePositionAndOrientation(self.robotId)
+        basePosition = basePositionAndOrientation[0]
+        xCoordinateOfLinkZero = basePosition[0]
         tmpFileName  = "tmp"+ str(self.solutionID)+ ".txt"
         fitnessFileName = "fitness"+ str(self.solutionID)+ ".txt"
         file = open(tmpFileName, "w")
