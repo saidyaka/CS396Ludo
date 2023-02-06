@@ -18,3 +18,7 @@ steps = 1000
 front_amplitude = numpy.pi/2
 front_frequency = 10
 front_phaseOffset = -numpy.pi/2
+
+numSensorNeurons = 4
+numMotorNeurons = 4
+motorJointRange = 0.7
