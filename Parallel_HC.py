@@ -30,7 +30,7 @@ class PARALLEL_HILL_CLIMBER:
         self.Evaluate(self.children)
 
         self.Print()
-        #self.Select()
+        self.Select()
 
         
     def Evaluate(self, solutions):
@@ -56,7 +56,9 @@ class PARALLEL_HILL_CLIMBER:
 
     def Select(self):
         for key in self.children:
-            if self.parents[key].Get_Fitness() < self.children[key].Get_Fitness():
+        
+            if self.parents[key].Get_Fitness() > self.children[key].Get_Fitness(): 
+                
                 self.parents[key] = self.children[key]
 
     def Print(self):
