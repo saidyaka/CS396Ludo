@@ -8,17 +8,17 @@ import random
 
 
 
-numberOfGenerations = 20
-back_amplitude = numpy.pi/2
-back_frequency = 5
-back_phaseOffset = -numpy.pi/2
+numberOfGenerations = 1
 
-populationSize = 3
+
+populationSize = 1
 steps = 1000
-front_amplitude = numpy.pi/2
-front_frequency = 10
-front_phaseOffset = -numpy.pi/2
 
-numSensorNeurons = 2
-numMotorNeurons = 2
+numSensorNeurons = 13
+numMotorNeurons = 12
 motorJointRange = 1
+
+numLinks = 10
+linkShapes = ['cube', 'sphere', 'cylinder']
+initPosition = [0, 0, 1]
+length, width, height =1, 1, 1

@@ -1,4 +1,5 @@
 from solution import SOLUTION
+import pyrosim.pyrosim as pyrosim
 import constants as c
 import copy
 import os
@@ -34,8 +35,8 @@ class PARALLEL_HILL_CLIMBER:
 
         
     def Evaluate(self, solutions):
-        for key in solutions:
-            solutions[key].Start_Simulation("DIRECT")
+        for key in solutions.keys():
+            solutions[key].Start_Simulation("GUI")
         
         for key in self.parents:
             solutions[key].Wait_For_Simulation_To_End()
