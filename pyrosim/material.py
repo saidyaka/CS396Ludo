@@ -10,13 +10,13 @@ class MATERIAL:
 
              self.string1 = '<material name="Green">'
 
-             self.string2 = '    <color rgba="0 1.0 0 1.0"/>'
+             self.string2 = '    <color rgba="0 0.4 0 1.0"/>'
 
           
         else:
-             self.string1 = '<material name="Blue">'
+             self.string1 = '<material name="Cyan">'
 
-             self.string2 = '    <color rgba="0 0 1.0 1.0"/>'
+             self.string2 = '     <color rgba="0 1.0 1.0 1.0"/>'
 
         self.string3 = '</material>'
 

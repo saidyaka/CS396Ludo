@@ -79,4 +79,4 @@ class PARALLEL_HILL_CLIMBER:
 
         self.parents[best_parent_key].Start_Simulation("GUI")
         print("Best fitness: ", best_fitness)
-        #self.parent.Evaluate("GUI")
+        self.parent.Evaluate("GUI")

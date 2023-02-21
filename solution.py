@@ -4,6 +4,7 @@ import random
 import os
 import time
 import constants as c
+import random
 class SOLUTION:
     def __init__(self, nextAvailableID):
         self.myID = nextAvailableID
@@ -11,7 +12,11 @@ class SOLUTION:
         self.linksWithSensors = []
         self.numSensorNeurons = 0
         self.numMotorNeurons = 0
-
+        self.numlinks =  int(random.uniform(3, 15))
+    def init_weights(self):
+        self.numSensorNeurons = len(self.linksWithSensors)
+        self.numMotorNeurons = self.numlinks - 1
+        self.weights = numpy.random.rand(self.numSensorNeurons, self.numMotorNeurons) * 2 - 1
 
     def Evaluate(self, directOrGUI):
         self.Create_World()
@@ -55,44 +60,84 @@ class SOLUTION:
     def Create_World(self):
         pyrosim.Start_SDF("world.sdf")
         pyrosim.End()
-    def Generate_Link(self, shape, linkNumber, sensor ,position, length, width, height):
+    def Generate_Link(self,  linkNumber, sensor ,position, length, width, height):
         if sensor: 
             self.linksWithSensors.append(linkNumber)
         x, y, z = position
-        if shape == 'cube':
-            pyrosim.Send_Cube(name=f'link{linkNumber}', pos=[x,y,z] , size=[length,width,height], sensor = sensor)
-        elif shape == 'cylinder':
-            pyrosim.Send_Cylinder(name=f'link{linkNumber}', pos=[x,y,z] , length=length, radius=width, sensor = sensor)
-        elif shape == 'sphere':
-            pyrosim.Send_Sphere(name=f'link{linkNumber}', pos=[x,y,z] , radius=length , sensor = sensor)
-        else:
-            return 'Invalid shape'
+        pyrosim.Send_Cube(name=f'link{linkNumber}', pos=[x,y,z] , size=[length,width,height], sensor = sensor)
 
-        if linkNumber == 0:
-            pyrosim.Send_Joint( name = f'link{linkNumber}_link{linkNumber+1}' , parent= f'link{linkNumber}' , child = f'link{linkNumber+1}' , type = "revolute", position = [-c.length/2, 0, c.height], jointAxis="0 0 1")
-        elif linkNumber != c.numLinks-1:
-            pyrosim.Send_Joint( name = f'link{linkNumber}_link{linkNumber+1}' , parent= f'link{linkNumber}' , child = f'link{linkNumber+1}' , type = "revolute", position = [-length, 0, 0], jointAxis="0 0 1")
-        else:
-            return
+
+
+    def Generate_Joints(self, axis, prevAxis, linkNumber, length, width, height, position):
+
+            if axis =='x':
+                if linkNumber == 0 or prevAxis == None:
+                    pyrosim.Send_Joint( name = f'link{linkNumber}_link{linkNumber+1}' , parent= f'link{linkNumber}' , child = f'link{linkNumber+1}' , type = "revolute", position = [length/2, 0, position[2]], jointAxis="1 0 0")
+                elif linkNumber != self.numlinks-1:
+                    if prevAxis == 'y':
+                        pyrosim.Send_Joint( name = f'link{linkNumber}_link{linkNumber+1}' , parent= f'link{linkNumber}' , child = f'link{linkNumber+1}' , type = "revolute", position = [-length/2, -width/2, 0], jointAxis="1 0 0")
+                    elif prevAxis == 'z':
+                        pyrosim.Send_Joint( name = f'link{linkNumber}_link{linkNumber+1}' , parent= f'link{linkNumber}' , child = f'link{linkNumber+1}' , type = "revolute", position = [-length/2, 0, -height/2], jointAxis="1 0 0")
+                    else:
+                        pyrosim.Send_Joint( name = f'link{linkNumber}_link{linkNumber+1}' , parent= f'link{linkNumber}' , child = f'link{linkNumber+1}' , type = "revolute", position = [-length, 0, 0], jointAxis="1 0 0")
+                else:
+                    return
+            if axis == 'y':
+                if linkNumber == 0:
+                    pyrosim.Send_Joint( name = f'link{linkNumber}_link{linkNumber+1}' , parent= f'link{linkNumber}' , child = f'link{linkNumber+1}' , type = "revolute", position = [0, -length/2, position[2]], jointAxis="0 1 0")
+                elif linkNumber != self.numlinks-1:
+                    if prevAxis == 'x':
+                        pyrosim.Send_Joint( name = f'link{linkNumber}_link{linkNumber+1}' , parent= f'link{linkNumber}' , child = f'link{linkNumber+1}' , type = "revolute", position = [-length/2, -width/2, 0], jointAxis="0 1 0")
+                    elif prevAxis == 'z':
+                        pyrosim.Send_Joint( name = f'link{linkNumber}_link{linkNumber+1}' , parent= f'link{linkNumber}' , child = f'link{linkNumber+1}' , type = "revolute", position = [0, -length/2, -height/2], jointAxis="0 1 0")
+                    else:                    
+                        pyrosim.Send_Joint( name = f'link{linkNumber}_link{linkNumber+1}' , parent= f'link{linkNumber}' , child = f'link{linkNumber+1}' , type = "revolute", position = [0, -length, 0], jointAxis="0 1 0")
+                else:
+                    return
+            if axis ==  'z':
+                if linkNumber == 0:
+                    pyrosim.Send_Joint( name = f'link{linkNumber}_link{linkNumber+1}' , parent= f'link{linkNumber}' , child = f'link{linkNumber+1}' , type = "revolute", position = [0, 0, position[2]-length/2], jointAxis="0 0 1") # rotate around x/z plane 010
+                elif linkNumber != self.numlinks-1:
+                    if prevAxis == 'x':
+                        pyrosim.Send_Joint( name = f'link{linkNumber}_link{linkNumber+1}' , parent= f'link{linkNumber}' , child = f'link{linkNumber+1}' , type = "revolute", position = [-length/2, 0, -height/2], jointAxis="0 0 1")
+                    elif prevAxis == 'y':
+                        pyrosim.Send_Joint( name = f'link{linkNumber}_link{linkNumber+1}' , parent= f'link{linkNumber}' , child = f'link{linkNumber+1}' , type = "revolute", position = [0, -width/2, -height/2], jointAxis="0 0 1")
+                    else:
+                        pyrosim.Send_Joint( name = f'link{linkNumber}_link{linkNumber+1}' , parent= f'link{linkNumber}' , child = f'link{linkNumber+1}' , type = "revolute", position = [0, 0, -height], jointAxis="0 0 1")
+                else:
+                    return
     def Generate_Body(self):
         pyrosim.Start_URDF("body.urdf")
         
-        pyrosim.Send_Cube(name='Head', pos=c.initPosition , size=[c.length,c.width,c.height])
-        # pyrosim.Send_Sphere(name='Head', pos=c.initPosition , radius=c.length)
-        pyrosim.Send_Joint( name = 'Head_link0' , parent= 'Head' , child = 'link0' , type = "revolute", position = [-2, 0, 1], jointAxis="0 0 1")
+
         position = c.initPosition
-        length, width, height = c.length, c.width, c.height
-        for i in range(c.numLinks):
-            length, width, height = random.uniform(1, 2), random.uniform(1, 2), random.uniform(1, 2)
-            position = [-length/2, 0, 0]
-            self.Generate_Link(random.choice(c.linkShapes), 
-                            i, random.choice([0,1]),position,
+        axis = None
+        t = int(random.uniform(3, 9))
+        print(t)
+        for i in range(self.numlinks):
+            print(i)
+            length, width, height = random.uniform(0.1, 0.9), random.uniform(0.1, 0.9),random.uniform(0.1, 0.9)
+            self.Generate_Link(i, random.choice([True, True, False]),
+                            position= position,
                             length= length,
                             width= width,
                             height= height)
+
+            prevAxis = axis
+            axis = random.choice(['x', 'y', 'z'])
+
+            self.Generate_Joints(axis, prevAxis, i, length, width, height, position)
+
+            if axis == 'x':
+                 position = [length/2, 0, 0]
+            if axis ==  'y':
+                position = [0, width/2, 0]
+            if axis == 'z':
+                position = [0, 0, height/2]
+        
         pyrosim.End()
         self.numSensorNeurons = len(self.linksWithSensors)
-        self.numMotorNeurons = c.numLinks - 1
+        self.numMotorNeurons = self.numlinks - 1
         self.weights = numpy.random.rand(self.numSensorNeurons, self.numMotorNeurons) * 2 - 1
 
     def Generate_Brain(self):
@@ -100,9 +145,9 @@ class SOLUTION:
         for i in range(self.numSensorNeurons):
             pyrosim.Send_Sensor_Neuron(name = i , linkName = f"link{self.linksWithSensors[i]}")
         
-        for i in range(c.numLinks, 2*c.numLinks):
-            linkNumber = i - c.numLinks
-            if linkNumber != c.numLinks-1:
+        for i in range(self.numlinks, 2*self.numlinks):
+            linkNumber = i - self.numlinks
+            if linkNumber != self.numlinks-1:
                 pyrosim.Send_Motor_Neuron(name = linkNumber + self.numSensorNeurons , jointName = f"link{linkNumber}_link{linkNumber+1}")
 
         for currentRow in range(self.numSensorNeurons):

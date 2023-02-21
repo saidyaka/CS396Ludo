@@ -12,13 +12,16 @@ class SIMULATION:
     def __init__(self,directOrGUI, solutionID):
         self.directOrGUI = directOrGUI
 
+
+
+        
         self.runType = directOrGUI
         if self.runType == "DIRECT":
             self.physicsClient = p.connect(p.DIRECT)
         else:
             self.physicsClient = p.connect(p.GUI)
 
-        
+
         p.setAdditionalSearchPath(pybullet_data.getDataPath())
         p.setGravity(0,0,-9.8)
     
