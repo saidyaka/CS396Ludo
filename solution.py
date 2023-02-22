@@ -13,10 +13,6 @@ class SOLUTION:
         self.numSensorNeurons = 0
         self.numMotorNeurons = 0
         self.numlinks =  int(random.uniform(3, 15))
-    def init_weights(self):
-        self.numSensorNeurons = len(self.linksWithSensors)
-        self.numMotorNeurons = self.numlinks - 1
-        self.weights = numpy.random.rand(self.numSensorNeurons, self.numMotorNeurons) * 2 - 1
 
     def Evaluate(self, directOrGUI):
         self.Create_World()
