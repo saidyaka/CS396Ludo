@@ -92,7 +92,7 @@ class SOLUTION:
                     return
             if axis ==  'z':
                 if linkNumber == 0:
-                    pyrosim.Send_Joint( name = f'link{linkNumber}_link{linkNumber+1}' , parent= f'link{linkNumber}' , child = f'link{linkNumber+1}' , type = "revolute", position = [0, 0, position[2]-length/2], jointAxis="0 0 1") # rotate around x/z plane 010
+                    pyrosim.Send_Joint( name = f'link{linkNumber}_link{linkNumber+1}' , parent= f'link{linkNumber}' , child = f'link{linkNumber+1}' , type = "revolute", position = [0, 0, position[2]-length/2], jointAxis="0 0 1")
                 elif linkNumber != self.numlinks-1:
                     if prevAxis == 'x':
                         pyrosim.Send_Joint( name = f'link{linkNumber}_link{linkNumber+1}' , parent= f'link{linkNumber}' , child = f'link{linkNumber+1}' , type = "revolute", position = [-length/2, 0, -height/2], jointAxis="0 0 1")
