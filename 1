@@ -18,3 +18,19 @@ destroy semaphore
 semaphore destroyed
 destroy main semaphore
 main semaphore destroyed
+Traceback (most recent call last):
+  File "simulate.py", line 15, in <module>
+    simulation.Run()
+  File "/Users/saidyaka/CS396Ludo/simulation.py", line 36, in Run
+    self.robot.Sense(i)
+  File "/Users/saidyaka/CS396Ludo/robot.py", line 31, in Sense
+    self.sensors[name].Get_Value(t)
+  File "/Users/saidyaka/CS396Ludo/sensor.py", line 14, in Get_Value
+    self.values[i] = pyrosim.Get_Touch_Sensor_Value_For_Link(self.linkName)
+  File "/Users/saidyaka/CS396Ludo/pyrosim/pyrosim.py", line 51, in Get_Touch_Sensor_Value_For_Link
+    pts = p.getContactPoints()
+pybullet.error: Not connected to physics server.
+Exception ignored in: <function SIMULATION.__del__ at 0x1059163a0>
+Traceback (most recent call last):
+  File "/Users/saidyaka/CS396Ludo/simulation.py", line 61, in __del__
+pybullet.error: Not connected to physics server.

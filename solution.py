@@ -5,14 +5,15 @@ import os
 import time
 import constants as c
 import random
+from robot import ROBOT 
 class SOLUTION:
     def __init__(self, nextAvailableID):
         self.myID = nextAvailableID
-       
+
         self.linksWithSensors = []
         self.numSensorNeurons = 0
         self.numMotorNeurons = 0
-        self.numlinks =  int(random.uniform(3, 15))
+        self.numlinks =  int(random.uniform(2, 10))
     def init_weights(self):
         self.numSensorNeurons = len(self.linksWithSensors)
         self.numMotorNeurons = self.numlinks - 1
@@ -22,7 +23,7 @@ class SOLUTION:
         self.Create_World()
         self.Generate_Body()
         self.Generate_Brain()
-        
+        print("AAAAAAAA")
         os.system("python3 simulate.py " +directOrGUI +  " " + str(self.myID)  + "2&>1 &")
         fitnessFileName = "fitness" + str(self.myID)+".txt"
         while not os.path.exists(fitnessFileName):
@@ -41,17 +42,18 @@ class SOLUTION:
     
     def Wait_For_Simulation_To_End(self):
         fitnessFileName = "fitness" + str(self.myID) + ".txt"
+        
         while not os.path.exists(fitnessFileName):
             time.sleep(0.01)
-
+        print("WE OUT")
         file = open(fitnessFileName, "r")
         self.fitness = float(file.read())
         file.close()
         #print(self.fitness)
         os.system("rm " + fitnessFileName)
     def Mutate(self):
-        row1 = random.randint(0,c.numSensorNeurons-1)
-        col1 = random.randint(0,c.numMotorNeurons-1)
+        row1 = random.randint(0,self.numSensorNeurons-1)
+        col1 = random.randint(0,self.numMotorNeurons-1)
         self.weights[row1, col1] = random.random()*2-1
     def Get_Fitness(self):
         return self.fitness  
@@ -107,38 +109,38 @@ class SOLUTION:
                 else:
                     return
     def Generate_Body(self):
-        pyrosim.Start_URDF("body.urdf")
-        
+    
+            pyrosim.Start_URDF("body.urdf")
+            
+            position = c.initPosition
+            axis = None
+            t = int(random.uniform(3, 9))
+            for i in range(self.numlinks):
+                length, width, height = random.uniform(1, 2), random.uniform(1, 2),random.uniform(1, 2)
+                self.Generate_Link(i, random.choice([True, True, False]),
+                                position= position,
+                                length= length,
+                                width= width,
+                                height= height)
 
-        position = c.initPosition
-        axis = None
-        t = int(random.uniform(3, 9))
-        print(t)
-        for i in range(self.numlinks):
-            print(i)
-            length, width, height = random.uniform(0.1, 0.9), random.uniform(0.1, 0.9),random.uniform(0.1, 0.9)
-            self.Generate_Link(i, random.choice([True, True, False]),
-                            position= position,
-                            length= length,
-                            width= width,
-                            height= height)
+                prevAxis = axis
+                axis = random.choice(['x', 'y', 'z'])
 
-            prevAxis = axis
-            axis = random.choice(['x', 'y', 'z'])
+                self.Generate_Joints(axis, prevAxis, i, length, width, height, position)
 
-            self.Generate_Joints(axis, prevAxis, i, length, width, height, position)
+                if axis == 'x':
+                    position = [length/2, 0, 0]
+                if axis ==  'y':
+                    position = [0, width/2, 0]
+                if axis == 'z':
+                    position = [0, 0, height/2]
+            
+            pyrosim.End()
+            self.numSensorNeurons = len(self.linksWithSensors)
+            self.numMotorNeurons = self.numlinks - 1
+            self.weights = numpy.random.rand(self.numSensorNeurons, self.numMotorNeurons) * 2 - 1
 
-            if axis == 'x':
-                 position = [length/2, 0, 0]
-            if axis ==  'y':
-                position = [0, width/2, 0]
-            if axis == 'z':
-                position = [0, 0, height/2]
-        
-        pyrosim.End()
-        self.numSensorNeurons = len(self.linksWithSensors)
-        self.numMotorNeurons = self.numlinks - 1
-        self.weights = numpy.random.rand(self.numSensorNeurons, self.numMotorNeurons) * 2 - 1
+
 
     def Generate_Brain(self):
         pyrosim.Start_NeuralNetwork(f'brain{self.myID}.nndf')

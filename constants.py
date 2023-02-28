@@ -8,11 +8,10 @@ import random
 
 
 
-numberOfGenerations = 10
+numberOfGenerations = 40
 
-
-populationSize = 1
-steps = 1000
+populationSize = 5
+steps = 10000
 
 numSensorNeurons = 13
 numMotorNeurons = 12
@@ -20,4 +19,4 @@ motorJointRange = 1
 
 numLinks = 20
 linkShapes = ['cube']
-initPosition = [0, 0, 3]
+initPosition = [0, 0, 5]

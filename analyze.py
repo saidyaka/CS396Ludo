@@ -1,15 +1,20 @@
-import numpy
-import matplotlib.pyplot
+import matplotlib.pyplot as plt
+import csv
 
+with open('test2.csv','r') as file:
+    x = file.read()
+x = x.split(",")
+y = []
+for i in range(40):
+    x[i] = float(x[i])
+    y.append(i)
+print(x)
 
-#backLegSensorValues = numpy.load('data/info.npy', mmap_mode=None, allow_pickle=False, fix_imports=True, encoding='ASCII',  max_header_size=10000)
-#FrontLegSensorValues = numpy.load('data/frontInfo.npy', mmap_mode=None, allow_pickle=False, fix_imports=True, encoding='ASCII',  max_header_size=10000)
-#matplotlib.pyplot.plot(backLegSensorValues,linewidth=4, label = "back")
+plt.plot(y, x, color = 'g', label = "Fitness")
+plt.xlabel('evolution number')
+plt.ylabel('fitness')
+plt.title('Fitness of best seed at each evolution')
+plt.legend()
+plt.show()
 
-#matplotlib.pyplot.plot(FrontLegSensorValues, label = "front")
-#matplotlib.pyplot.legend()
-sins = numpy.load('data/back_sins.npy', mmap_mode=None, allow_pickle=False, fix_imports=True, encoding='ASCII',  max_header_size=10000)
-fsins = numpy.load('data/front_sins.npy', mmap_mode=None, allow_pickle=False, fix_imports=True, encoding='ASCII',  max_header_size=10000)
-matplotlib.pyplot.plot(sins, linewidth=4, label = "sins")
-matplotlib.pyplot.plot(fsins, label = "fsins")
-matplotlib.pyplot.show()
+plt.line

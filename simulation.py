@@ -54,7 +54,7 @@ class SIMULATION:
                 maxForce = 100)
 
 '''
-            time.sleep(1/1000)
+        self.Get_Fitness()
     def Get_Fitness(self):
         self.robot.Get_Fitness()
     def __del__(self):

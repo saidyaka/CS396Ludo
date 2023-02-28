@@ -33,6 +33,7 @@ class ROBOT:
         self.nn.Update()
        #self.nn.Print()
     def Get_Fitness(self):
+        print("AAAAAAAAAA")
         basePositionAndOrientation = p.getBasePositionAndOrientation(self.robotId)
         basePosition = basePositionAndOrientation[0]
         xCoordinateOfLinkZero = basePosition[1]

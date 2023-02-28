@@ -20,7 +20,6 @@ class PARALLEL_HILL_CLIMBER:
         for currentGeneration in range(c.numberOfGenerations):
 
             self.Evolve_For_One_Generation()
-        
     def Evolve_For_One_Generation(self):
         
         
@@ -36,7 +35,7 @@ class PARALLEL_HILL_CLIMBER:
         
     def Evaluate(self, solutions):
         for key in solutions.keys():
-            solutions[key].Start_Simulation("GUI")
+            solutions[key].Start_Simulation("DIRECT")
         
         for key in self.parents:
             solutions[key].Wait_For_Simulation_To_End()
@@ -64,19 +63,26 @@ class PARALLEL_HILL_CLIMBER:
 
     def Print(self):
         print()
+        best = 100000000000
         for el in self.parents:
             print("Parent: ", self.parents[el].Get_Fitness(), "| Child: ", self.children[el].Get_Fitness())
-        print()
-    
+            best  = min(best,self.parents[el].Get_Fitness())
+
+
+        with open('test4.csv','a') as fd:
+            fd.write(str(best)+",")
+        print(best)
     def Show_Best(self):
         best_parent_key = "None"
         best_fitness = 1000000
+        print(self.parents)
         for key in self.parents:
             parent_fitness = self.parents[key].Get_Fitness()
             if parent_fitness < best_fitness:
                 best_fitness = parent_fitness
                 best_parent_key = key
-
+                
+        print(best_parent_key)
         self.parents[best_parent_key].Start_Simulation("GUI")
         print("Best fitness: ", best_fitness)
-        self.parent.Evaluate("GUI")
+        self.parents[best_parent_key].Evaluate("GUI")
