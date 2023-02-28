@@ -15,7 +15,7 @@ This code works by creating a random body with a random amount of sensors and mo
 > My random robots at first will have very bad fitness functions ranging from - 2 - + 10 but in the end I was able to hit as low as -31 meaning it moved very far away
 
 
-Here are 5 different runs 
+Here are fitness functions from 5 different runs with 40 generations
 
 
 https://user-images.githubusercontent.com/19967483/221930351-27ef52d5-cc3b-4d2d-b5b4-efc9e1b56e83.png
