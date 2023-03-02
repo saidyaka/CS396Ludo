@@ -6,7 +6,7 @@ This code works by creating a random body with a random amount of sensors and mo
 ----------------------------------------------------------------------------------------------------------------------------------------------
 >I changed the body in solutions.py to generate randomly at first it generates a random number, according to that number we get a rectangle of random shapes. Next we pick a random axis (X,Y,Z) and then we do a "coinflip" to see if the new body part will have a sensor or not making the rectangles blue or green, we do this for each shape till we hit our random number. For the future generations it only changes the body when the fitness function is low and if its increasing it changes the brain
 >if the absolute value of fitness is less than 2 after 5 evolutions we assume the body is unfit for movement and create a new body and a brain, if the fitness is greater than 2 we create a new brain ONLY. WE use absolute value because we assume if a robot can move in the positive direction it could technically move backwards as well with reverse weights
-
+>>diagram from assignment 7
 >> https://user-images.githubusercontent.com/19967483/220274532-39298956-5e41-42e1-b9e5-9ea2927eee1c.png
 
 >>Diagram explaining more
