@@ -1,4 +1,4 @@
-# CS 339 Artificial Life Final Project - The Engineer
+# CS 339 Artificial Life Final Project - Explained to a 10 year old
 
 >TLDR/Just want to run?: 
 >> if you want to see the first and the best robot run 'python3 main.py show'
