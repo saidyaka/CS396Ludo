@@ -13,7 +13,6 @@ class ROBOT:
     def __init__(self,solutionID, show = "NO"):
         print(show)
         if show == "show":
-            print("AAAAAAAAA")
             self.motors = {}
             self.robotId = p.loadURDF(f"bestBody.urdf")
             self.solutionID = 100000000
@@ -22,7 +21,6 @@ class ROBOT:
             self.Prepare_To_Sense()
             self.Prepare_To_Act()
         else:
-            print("CCCCCCCCC")
             self.motors = {}
             self.robotId = p.loadURDF(f"body{solutionID}.urdf")
             self.solutionID = solutionID
