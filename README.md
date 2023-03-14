@@ -1,4 +1,4 @@
-##CS 339 Artificial Life Final Project - The Engineer
+# CS 339 Artificial Life Final Project - The Engineer
 
 >TLDR: Just want to run? 
 > if you want to see the first and the best robot run
