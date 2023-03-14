@@ -10,16 +10,27 @@ from motor import MOTOR
 import os
 from pyrosim.neuralNetwork import NEURAL_NETWORK
 class ROBOT:
-    def __init__(self,solutionID):
-        self.motors = {}
-        self.robotId = p.loadURDF("body.urdf")
-        self.solutionID = solutionID
-        pyrosim.Prepare_To_Simulate(self.robotId)
-        self.nn = NEURAL_NETWORK(f'brain{self.solutionID}.nndf')
-        self.Prepare_To_Sense()
-        self.Prepare_To_Act()
-
-        os.system("rm " + "brain"+str(self.solutionID)+".nndf")
+    def __init__(self,solutionID, show = "NO"):
+        print(show)
+        if show == "show":
+            print("AAAAAAAAA")
+            self.motors = {}
+            self.robotId = p.loadURDF(f"bestBody.urdf")
+            self.solutionID = 100000000
+            pyrosim.Prepare_To_Simulate(self.robotId)
+            self.nn = NEURAL_NETWORK(f'bestBrain.nndf')
+            self.Prepare_To_Sense()
+            self.Prepare_To_Act()
+        else:
+            print("CCCCCCCCC")
+            self.motors = {}
+            self.robotId = p.loadURDF(f"body{solutionID}.urdf")
+            self.solutionID = solutionID
+            pyrosim.Prepare_To_Simulate(self.robotId)
+            self.nn = NEURAL_NETWORK(f'brain{self.solutionID}.nndf')
+            self.Prepare_To_Sense()
+            self.Prepare_To_Act()
+        #os.system("rm " + "brain"+str(self.solutionID)+".nndf")
 
     def Prepare_To_Sense(self):
         self.sensors ={}
@@ -33,15 +44,15 @@ class ROBOT:
         self.nn.Update()
        #self.nn.Print()
     def Get_Fitness(self):
-        print("AAAAAAAAAA")
         basePositionAndOrientation = p.getBasePositionAndOrientation(self.robotId)
         basePosition = basePositionAndOrientation[0]
-        xCoordinateOfLinkZero = basePosition[1]
+        xCoordinateOfLinkZero = basePosition[0]
         tmpFileName  = "tmp"+ str(self.solutionID)+ ".txt"
         fitnessFileName = "fitness"+ str(self.solutionID)+ ".txt"
         file = open(tmpFileName, "w")
         file.write(str(xCoordinateOfLinkZero))
         file.close()
+
         os.system("mv " + tmpFileName + " " + fitnessFileName)  
     def Prepare_To_Act(self):
         self.joints ={}

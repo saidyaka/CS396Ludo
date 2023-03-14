@@ -8,9 +8,9 @@ import random
 
 
 
-numberOfGenerations = 40
+numberOfGenerations = 20
 
-populationSize = 5
+populationSize = 10
 steps = 10000
 
 numSensorNeurons = 13

@@ -3,12 +3,20 @@ import pyrosim.pyrosim as pyrosim
 import constants as c
 import copy
 import os
+import shutil
 class PARALLEL_HILL_CLIMBER:
     def __init__(self):
+        print("Deleting")
         os.system("rm brain*.nndf")
-        os.system("rm fitness*.txt")
+        os.system("rm body*.urdf")
+        #os.system("rm fitness*.txt")
+        os.system(f'touch bestBrain.nndf')
+        os.system(f'touch bestBody.urdf')
+        self.allTime = 10000
         self.parents = {}
+        self.tr = 0
         self.nextAvailableID = 0
+        self.maybe = ""
         for i in range(c.populationSize):
             self.parents[i] = SOLUTION(self.nextAvailableID)
             self.nextAvailableID+=1
@@ -21,7 +29,6 @@ class PARALLEL_HILL_CLIMBER:
 
             self.Evolve_For_One_Generation()
     def Evolve_For_One_Generation(self):
-        
         
         self.Spawn()
         
@@ -36,7 +43,6 @@ class PARALLEL_HILL_CLIMBER:
     def Evaluate(self, solutions):
         for key in solutions.keys():
             solutions[key].Start_Simulation("DIRECT")
-        
         for key in self.parents:
             solutions[key].Wait_For_Simulation_To_End()
 
@@ -62,27 +68,35 @@ class PARALLEL_HILL_CLIMBER:
                 self.parents[key] = self.children[key]
 
     def Print(self):
-        print()
-        best = 100000000000
+        best = 1000000000
+        besti = 0
+        bestr = ''
+        i = 0
         for el in self.parents:
             print("Parent: ", self.parents[el].Get_Fitness(), "| Child: ", self.children[el].Get_Fitness())
-            best  = min(best,self.parents[el].Get_Fitness())
+            pf = self.parents[el].Get_Fitness()
+            if pf < best:
+            
+                best = pf
+                besti = self.parents[el].Get_ID()
 
+            
+        
+        if best < self.allTime:
+            self.allTime = best
+            self.tr = besti 
+            os.system(f'rm bestBrain.nndf')
+            os.system(f'rm bestBody.nndf')
+            shutil.copyfile(f'brain{self.tr}.nndf', f'tempo.nndf')
+            os.rename(f'tempo.nndf', 'bestBrain.nndf')
+            shutil.copyfile(f'body{self.tr}.urdf', f'tipo.urdf')
+            os.rename(f'tipo.urdf', 'bestBody.urdf')
+        print("current " + str(self.allTime))
+            
 
-        with open('test4.csv','a') as fd:
-            fd.write(str(best)+",")
-        print(best)
-    def Show_Best(self):
-        best_parent_key = "None"
-        best_fitness = 1000000
-        print(self.parents)
-        for key in self.parents:
-            parent_fitness = self.parents[key].Get_Fitness()
-            if parent_fitness < best_fitness:
-                best_fitness = parent_fitness
-                best_parent_key = key
-                
-        print(best_parent_key)
-        self.parents[best_parent_key].Start_Simulation("GUI")
-        print("Best fitness: ", best_fitness)
-        self.parents[best_parent_key].Evaluate("GUI")
+        with open('test5csv','a') as fd:
+            fd.write(str(self.allTime)+",")
+    def Show_Best(self):      
+        print(self.tr)    
+        systemCommand = "python3 simulate.py " + "GUI " + str(self.tr) + " 2&>1 &"
+        os.system(systemCommand)
