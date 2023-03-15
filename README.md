@@ -3,7 +3,7 @@
 >TLDR/Just want to run?: 
 >> if you want to see the first and the best robot run 'python3 main.py show'
 >> 
->>if you want to evolve your own robots run (takes 30+ mins 500 generations at 10 parents) 'python3 main.py evolve'
+>>if you want to evolve your own robots run (takes 1hour+ 500 generations at 10 parents) 'python3 main.py evolve'
 ----------------------------------------------------------------------------------------------------------------------------------------------
 ## GIF
 
@@ -34,7 +34,6 @@ When a robot is created, it is assigned a random brain, for each evolution we mu
 Mutating a brain happens by picking random numbers and sending different signals. 
 
 
-Sources: 
 ## What is Parallel hillclimbing
 in the most simple way possible, Parallel hillclimber evolution is when two groups of animals are trying to climb up two different hills at the same time. Each group is trying to get to the top of their own hill, but they can't see each other or what the other group is doing. As they climb, they get better and better at climbing their own hill, until they both reach the top! Even though they were trying to climb different hills, they both got really good at climbing because they kept practicing and getting better. My goal is to reduce the X position as much as possible in the negative direction
 
@@ -49,9 +48,24 @@ I decided to do the entire 50,000 sims, doing 10 runs with 10 population size of
 ![pic](pics/fitnessEvolution.png)
 
 ## Morphologies
-In the first evolutions the robots are usually extremely low fitness or literally at 0 with no ability to move after 100 evolutions but in 
-Sources: 
+In the first evolutions the robots are usually extremely low fitness or literally at 0 with no ability to move after the 500 evolutions, they actually look quite similar, the motor movements are very small and frequent that it almost looks like its gliding across the floor, like an iceskater.
+
+## How to Run the Code
+### Cloning
+1. Clone the repository
+2. Write 'Git Checkout Final' to switch to the right branch
+### Running
+> For Running you have 2 options, if you just want to see the first robot and the last robot (most fit robot) simply write
+>>'python3 main.py show'
+
+>If you wish to run through an entire evolution yourself write 
+
+>>'python3 main.py evolve'
+
+## Sources: 
 
 reddit.com/ludobots
+
 https://amandaghassaei.com
+
 https://infoscience.epfl.ch/record/184991
