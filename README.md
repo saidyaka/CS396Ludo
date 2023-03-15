@@ -34,7 +34,6 @@ When a robot is created, it is assigned a random brain, for each evolution we mu
 Mutating a brain happens by picking random numbers and sending different signals. 
 
 
-Sources: 
 ## What is Parallel hillclimbing
 in the most simple way possible, Parallel hillclimber evolution is when two groups of animals are trying to climb up two different hills at the same time. Each group is trying to get to the top of their own hill, but they can't see each other or what the other group is doing. As they climb, they get better and better at climbing their own hill, until they both reach the top! Even though they were trying to climb different hills, they both got really good at climbing because they kept practicing and getting better. My goal is to reduce the X position as much as possible in the negative direction
 
