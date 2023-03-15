@@ -50,8 +50,10 @@ I decided to do the entire 50,000 sims, doing 10 runs with 10 population size of
 ## Morphologies
 In the first evolutions the robots are usually extremely low fitness or literally at 0 with no ability to move after 100 evolutions but in 
 
-Sources: 
+## Sources: 
 
 reddit.com/ludobots
+
 https://amandaghassaei.com
+
 https://infoscience.epfl.ch/record/184991
