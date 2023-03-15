@@ -9,6 +9,9 @@
 
 ![gif](pics/theGif.gif)
 
+##Video
+https://youtu.be/kwDiRrZQTUs
+
 ## What does my project do?
 Basically we are trying to create a robot that RUNS REALLY FAST! This code creates randomly generated robots that have random movement and bodies, like most completely randomly generated things at first it's AWFUL and barely working, but after big and sometimes small tweaks to both the body and the brain we are able to create robots that RUN REALLY FAST, maybe as fast as Sonic and the Flash! (and maybe even faster if we had more time and a better PC). Now all of this might sound like impossible to do so lets start from the beginning!
 ## What is Evolution ? 
