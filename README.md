@@ -48,7 +48,7 @@ I decided to do the entire 50,000 sims, doing 10 runs with 10 population size of
 ![pic](pics/fitnessEvolution.png)
 
 ## Morphologies
-In the first evolutions the robots are usually extremely low fitness or literally at 0 with no ability to move after 100 evolutions but in 
+In the first evolutions the robots are usually extremely low fitness or literally at 0 with no ability to move after the 500 evolutions, they actually look quite similar 
 
 ## Sources: 
 
