@@ -50,17 +50,21 @@ Parallel Hillclimbing happens with the childs mutating till it is more fit than 
 I hypothesize after a lot of evolution we will end up with something similar to a long dog and I'd assume it to take huge steps like gallops, I think gallops could be created as I have a big range for my motor weights. Here's how I'd guess the movement to look like after evolution
 
 
+![pic](pics/dog.jpeg)
+
 # Results
 ## Sims
 I decided to do the entire 50,000 sims, doing 10 runs with 10 population size of 500 generations, reaching the 50,000 sims. Each run took me about 1 hour and 30 minutes or as I measured it, so the 10 runs took me well over 15 hours with some mistakes in the runs
 ![pic](pics/fitnessEvolution.png)
 
-##Post Result Analysis (3/19)
-After seeing my 10 most evolved bots I was quite shocked to say none of them really looked like a dog, even though I'd have guessed that to be an optimized design, I saw a lot of robots 
-## Morphologies
-In the first evolutions the robots are usually extremely low fitness or literally at 0 with no ability to move after the 500 evolutions, they actually look quite similar, the motor movements are very small and frequent that it almost looks like its gliding across the floor, like an iceskater.
 
-##Analysis and Personal conclusions 
+## Morphologies
+In the first evolutions the robots are usually extremely low fitness or literally at 0 with no ability to move after the 500 evolutions, they actually look quite similar, the motor movements are very small and frequent that it almost looks like its gliding across the floor, like an iceskater. The best bots tend to have 3 or 4 limbs, never 1 or 2 that I've seen and they movements are very small enough that we need to zoom into see the motors move. 
+
+## Post Result Analysis and the future (3/19)
+After seeing my 10 most evolved bots I was quite shocked to see none of them really looked like a dog, even though I'd have guessed that to be an optimized design, I saw a lot of robots and for the ones with a high fitness function one thing I was able to notice was them having 3-4 limbs only, while I supported limbs upto 6, and previously in my testing upto 12 even though it was way too slow to run and evolve, it would not get very far. I think our evolution does tend to favor simplistic designs, but I think we cannot conclude this as of now because we place limbs randomly and as the number of limbs increase so does the chance of one limb being more of a stopper, I think if I were able to run on a super computer with millions of evolutions I could see designs that support more limb, and since in the higher evolutions we see a "gliding" if I had chance to experiment with higher amount of limbs I could see evolved robots looking similar to centipedes or even hexbug toys
+
+I'd also want to work with ludobots in the future a way where we have to worry about weight and friction.
 
 ## How to Run the Code
 ### Cloning
