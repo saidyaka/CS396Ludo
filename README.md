@@ -50,7 +50,7 @@ Parallel Hillclimbing happens with the childs mutating till it is more fit than 
 I hypothesize after a lot of evolution we will end up with something similar to a long dog and I'd assume it to take huge steps like gallops, I think gallops could be created as I have a big range for my motor weights. Here's how I'd guess the movement to look like after evolution
 
 
-![pic](pics/dog.jpeg)
+![pic](pics/dog.jpg)
 
 # Results
 ## Sims
