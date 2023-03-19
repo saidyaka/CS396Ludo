@@ -45,13 +45,22 @@ I changed my Parallel hillclimbing to have a few differences, like creating a WH
 ![pic](pics/comic.png)
 
 Parallel Hillclimbing happens with the childs mutating till it is more fit than its parent, and once that happens the child becomes the parent and a new child is created.
+
+## Pre-Result Hypothesis (3/19)
+I hypothesize after a lot of evolution we will end up with something similar to a long dog and I'd assume it to take huge steps like gallops, I think gallops could be created as I have a big range for my motor weights. Here's how I'd guess the movement to look like after evolution
+
+
 # Results
 ## Sims
-I decided to do the entire 50,000 sims, doing 10 runs with 10 population size of 500 generations, reaching the 50,000 sims. Each run took me about 1 hour and 30 minutes or as I measured it, so the 10 runs took me well over 15 hours with some mistaeks in the runs
+I decided to do the entire 50,000 sims, doing 10 runs with 10 population size of 500 generations, reaching the 50,000 sims. Each run took me about 1 hour and 30 minutes or as I measured it, so the 10 runs took me well over 15 hours with some mistakes in the runs
 ![pic](pics/fitnessEvolution.png)
 
+##Post Result Analysis (3/19)
+After seeing my 10 most evolved bots I was quite shocked to say none of them really looked like a dog, even though I'd have guessed that to be an optimized design, I saw a lot of robots 
 ## Morphologies
 In the first evolutions the robots are usually extremely low fitness or literally at 0 with no ability to move after the 500 evolutions, they actually look quite similar, the motor movements are very small and frequent that it almost looks like its gliding across the floor, like an iceskater.
+
+##Analysis and Personal conclusions 
 
 ## How to Run the Code
 ### Cloning
